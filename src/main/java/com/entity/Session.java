@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Set;
 
 @Entity
 @Table(name="sessions")
@@ -20,4 +21,6 @@ public class Session {
     private LocalTime startTime;
     private LocalTime endTime;
     private LocalDate sessionDate;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "session")
+    private Set<Ticket> tickets;
 }
