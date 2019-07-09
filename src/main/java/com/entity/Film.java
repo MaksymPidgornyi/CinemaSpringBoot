@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.Year;
+import java.util.Set;
 
 @Entity
 @Table(name="films")
@@ -19,4 +20,6 @@ public class Film {
     private Year created;
     @ManyToOne(fetch = FetchType.EAGER)
     private Director director;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "film")
+    private Set<Session> sessions;
 }
