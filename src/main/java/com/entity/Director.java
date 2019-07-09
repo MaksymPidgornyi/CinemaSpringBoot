@@ -16,6 +16,6 @@ public class Director {
     private long directorId;
     private String firstName;
     private String lastName;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="filmId")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="director")
     private Set<Film> films;
 }
