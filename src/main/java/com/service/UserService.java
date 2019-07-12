@@ -28,7 +28,7 @@ public class UserService {
         user.setEmail(dto.getEmail());
         user.setRole(Role.USER);
         user.setPassword(dto.getPassword());
-        user.setActivity(false);
+        user.setActivity(true);
 
         return user;
     }
