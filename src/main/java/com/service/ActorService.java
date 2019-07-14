@@ -17,4 +17,8 @@ public class ActorService {
     public void addActor(Actor actor){
         repository.save(actor);
     }
+
+    public Iterable<Actor> getAllActors(){
+        return repository.findAll();
+    }
 }
