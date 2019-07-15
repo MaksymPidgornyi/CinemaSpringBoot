@@ -18,4 +18,9 @@ public class Director {
     private String lastName;
     @OneToMany(fetch = FetchType.EAGER, mappedBy="director")
     private Set<Film> films;
+
+    @Override
+    public String toString(){
+        return firstName + " " + lastName;
+    }
 }
