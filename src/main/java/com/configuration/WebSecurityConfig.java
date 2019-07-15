@@ -1,12 +1,15 @@
 package com.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
@@ -16,6 +19,11 @@ import javax.sql.DataSource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
     private CustomAuthenticationSuccessHandler handler;
+
+    @Bean
+    public PasswordEncoder getPassworedEncoder(){
+        return new BCryptPasswordEncoder(10);
+    }
 
     @Autowired
     public WebSecurityConfig(DataSource dataSource, CustomAuthenticationSuccessHandler handler) {
