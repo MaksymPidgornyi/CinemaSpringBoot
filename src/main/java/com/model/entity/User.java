@@ -6,25 +6,38 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
 @Table(name="users")
-@Getter @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
+    @NotEmpty
+    @Size(max = 25)
     private String firstName;
+    @NotEmpty
+    @Size(max = 25)
     private String lastName;
+    @NotEmpty
+    @Size(max = 40)
     private String login;
+    @Size(min = 8)
     private String password;
+    @Email
+    @NotEmpty
     private String email;
     @Enumerated(EnumType.STRING)
     private Role role;
     private boolean activity;
+    @Transient
+    @NotEmpty
+    private String passwordConfirmation;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<Ticket> tickets;
