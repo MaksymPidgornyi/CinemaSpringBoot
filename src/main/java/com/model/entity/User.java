@@ -27,6 +27,7 @@ public class User implements UserDetails {
     @NotEmpty
     @Size(max = 40)
     private String login;
+    @NotEmpty
     @Size(min = 8)
     private String password;
     @Email
