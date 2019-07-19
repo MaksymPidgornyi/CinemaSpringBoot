@@ -1,13 +1,17 @@
 package com.controller;
 
-import com.model.dto.UserDto;
 import com.model.entity.*;
+import com.model.entity.enums.Role;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
+
+import javax.validation.Valid;
+import java.util.Map;
 
 @Controller
 public class AuthorizationController {
@@ -21,31 +25,34 @@ public class AuthorizationController {
         this.messageSource = messageSource;
     }
 
-    
-    public void getMainPage(){
-
-    }
-
     @GetMapping("/login")
-    public String getLogin(){
+    public String getLogin() {
         return "login";
     }
 
     @GetMapping("/register")
-    public String getRegister(){
+    public String getRegister() {
         return "register";
     }
 
     @PostMapping("/register")
-    public void postRegister(@RequestBody UserDto dto){
+    public String postRegister(@Valid User user, BindingResult bindingResult, Model model) {
 
-        System.out.println(dto);
+        if (bindingResult.hasErrors()) {
+            Map<String, String> fieldErrorMap = ControllerUtils.getErrorsMap(bindingResult);
 
-        User user = userService.dtoToUser(dto);
+            model.mergeAttributes(fieldErrorMap);
+        }
 
-        System.out.println(user);
+        if (user.getPassword().equals(user.getPasswordConfirmation())) {
 
-        userService.createUser(user);
+            user.setRole(Role.USER);
+            user.setPassword(userService.encodePassword(user.getPassword()));
+            user.setActivity(true);
+            userService.createUser(user);
+        }
+
+        return "register";
     }
 
 }
