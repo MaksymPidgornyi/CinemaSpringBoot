@@ -4,9 +4,12 @@ import com.model.entity.enums.Genre;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class ControllerUtils {
     static Map<String, String> getGenreMap(){
@@ -32,5 +35,14 @@ class ControllerUtils {
                 .stream()
                 .collect(Collectors.toMap(
                         fieldList -> fieldList.getField() + "Error", FieldError::getDefaultMessage));
+    }
+
+    static List<LocalDate> getCurrentMonthDates(LocalDate date) {
+
+        return Stream
+                .iterate(date.withDayOfMonth(1), d -> d.plusDays(1))
+                .limit(date.lengthOfMonth())
+                .collect(Collectors.toList());
+
     }
 }
