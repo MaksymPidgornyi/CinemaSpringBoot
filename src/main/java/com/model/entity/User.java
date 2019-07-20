@@ -27,8 +27,7 @@ public class User implements UserDetails {
     @NotEmpty
     @Size(max = 40)
     private String login;
-    @NotEmpty
-    @Size(min = 8)
+    @Size(min = 8, max = 36)
     private String password;
     @Email
     @NotEmpty
@@ -38,7 +37,7 @@ public class User implements UserDetails {
     private boolean activity;
     @Transient
     @NotEmpty
-    private String passwordConfirmation;
+    private String confirmation;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<Ticket> tickets;
