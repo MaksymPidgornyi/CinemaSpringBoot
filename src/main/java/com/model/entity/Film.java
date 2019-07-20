@@ -2,6 +2,7 @@ package com.model.entity;
 
 import com.model.entity.enums.Genre;
 import lombok.*;
+import org.hibernate.validator.constraints.time.DurationMax;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -29,7 +30,8 @@ public class Film {
     @PastOrPresent
     private Year created;
     @NotNull
-    private LocalTime duration;
+    @DurationMax(minutes = 120L)
+    private Duration duration;
     @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
     private Director director;
@@ -39,4 +41,8 @@ public class Film {
     @NotNull
     @NotEmpty
     private Set<Actor> actors;
+
+    public void setDuration(String duration){
+        this.duration = Duration.ofMinutes(Long.parseLong(duration));
+    }
 }
