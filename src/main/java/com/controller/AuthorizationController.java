@@ -44,12 +44,14 @@ public class AuthorizationController {
             model.mergeAttributes(fieldErrorMap);
         }
 
-        if (user.getPassword().equals(user.getPasswordConfirmation())) {
+        if (user.getPassword().equals(user.getConfirmation()) && !bindingResult.hasErrors()) {
 
             user.setRole(Role.USER);
             user.setPassword(userService.encodePassword(user.getPassword()));
             user.setActivity(true);
             userService.createUser(user);
+
+            return "redirect:/login";
         }
 
         return "register";
