@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .passwordEncoder(NoOpPasswordEncoder.getInstance())
+                .passwordEncoder(getPassworedEncoder())
                 .usersByUsernameQuery("SELECT login, password, activity FROM users WHERE login = ?")
                 .authoritiesByUsernameQuery("SELECT login, role from users where login = ?");
     }
