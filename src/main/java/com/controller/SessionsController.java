@@ -12,7 +12,7 @@ import java.util.Objects;
 
 @Controller
 @RequestMapping("/afisha")
-public class SessionsContoller {
+public class SessionsController {
     private SessionService sessionService;
 
     @Autowired
