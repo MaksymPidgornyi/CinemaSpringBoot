@@ -17,6 +17,10 @@ public class SessionService {
         this.repository = repository;
     }
 
+    public void create(Session session){
+        repository.save(session);
+    }
+
     public Page<Session> getSessionsByDate(LocalDate date, Pageable pageable){
         return repository.findAllBySessionDate(date, pageable);
     }
