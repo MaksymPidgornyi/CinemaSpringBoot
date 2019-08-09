@@ -1,0 +1,9 @@
+<#import "/spring.ftl" as spring/>
+
+<#macro artistForm action>
+        <form method="post" action=${action}>
+            <label for="firstname"><@spring.message "form.firstname"/></label><input autocomplete="off" name="firstName" type="text" id="firstname"/><br/>
+            <label class="second" for="lastname"><@spring.message "form.lastname"/></label><input class="second" autocomplete="off" name="lastName" type="text" id="lastname"/><br/>
+            <input class="third" type="submit" id="submitButton" value="<@spring.message "form.submit"/>">
+        </form>
+</#macro>

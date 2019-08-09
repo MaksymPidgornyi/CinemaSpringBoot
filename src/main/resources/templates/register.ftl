@@ -1,72 +1,49 @@
 <#import 'parts/common.ftl' as c>
+<#import "spring.ftl" as spring/>
 
-<@c.page "Register">
+<@c.page "page.register.title">
     <div id="container">
-        <div id="form-container">
-            <form id="registrationForm">
-                <label for="login-field">Login</label><input type="text" name="login-field" id="login-field"/><br/>
-                <label for="email-field">Email</label><input type="email" name="email-field" id="email-field"><br/>
-                <label for="firstName-field">First Name</label><input type="text" name="firstName-field" id="firstName-field"/><br/>
-                <label for="lastName-field">Last Name</label><input type="text" name="lastName-field" id="lastName-field"><br/>
-                <label for="password-field">Password</label><input type="password" name="password-field" id="password-field"/><br/>
-                <label for="confirm-field">Confirm password</label><input type="password" name="confirm-field" id="confirm-field"/><br/>
-                <input type="submit" id="regButton" value="Register"/>
+        <div class="formDiv">
+            <p class="formHeader"></p>
+            <form id="registrationForm" action="/register" method="post">
+
+                <label for="login"><@spring.message "form.login"/></label><input type="text" name="login" id="login"/><br/>
+                <#if loginError??>
+                    <div class="invalid-feedback d-block">${loginError}</div>
+                </#if>
+
+                <label for="email"><@spring.message "form.email"/></label>
+                <input type="email" name="email" id="email"><br/>
+                <#if emailError??>
+                    <div class="invalid-feedback d-block">${emailError}</div>
+                </#if>
+
+                <label for="firstName"><@spring.message "form.firstname"/></label>
+                <input type="text" name="firstName" id="firstName"/><br/>
+                <#if firstNameError??>
+                    <div class="invalid-feedback d-block">${firstNameError}</div>
+                </#if>
+
+                <label for="lastName"><@spring.message "form.lastname"/></label>
+                <input type="text" name="lastName" id="lastName"><br/>
+                <#if lastNameError??>
+                    <div class="invalid-feedback d-block">${lastNameError}</div>
+                </#if>
+
+                <label for="password"><@spring.message "form.password"/></label>
+                <input type="password" name="password" id="password"/><br/>
+                <#if passwordError??>
+                    <div class="invalid-feedback d-block">${passwordError}</div>
+                </#if>
+
+                <label for="confirmation"><@spring.message "form.confirm"/></label>
+                <input type="password" name="confirmation" id="confirmation"/><br/>
+                <#if confirmationError??>
+                    <div class="invalid-feedback d-block">${confirmationError}</div>
+                </#if>
+                <input type="submit" id="regButton" value="<@spring.message "form.submit.register"/>"/>
+
             </form>
         </div>
     </div>
-
-    <script>
-        $(function(){
-            $.ajaxSetup({
-                cache: false
-            });
-
-            $("#registrationForm").submit( function(event){
-                event.preventDefault();
-                sendUserToServer();
-            } );
-        });
-
-        function RegistrationData(login, email, firstName, lastName, password){
-            this.login = login;
-            this.email = email;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.password = password;
-        }
-
-        function readUserDataFromUI(){
-            var reg = new RegistrationData( $('#login-field').val(),
-                $('#email-field').val(),
-                $('#firstName-field').val(),
-                $('#lastName-field').val(),
-                $('#password-field').val()
-            );
-            return reg;
-        }
-
-        function sendUserToServer(){
-
-            var reg = readUserDataFromUI();
-
-                $.ajax({
-                    type: "POST",
-                    url: "/register",
-                    contentType: 'application/json',
-                    data: JSON.stringify(reg),
-                    success: function(data){
-                        console.log(reg);
-                        document.getElementById("registrationForm").reset();
-                        alert('Succesfully registrated');
-                        window.location.href = "/login";
-                    },
-                    error:function(error){
-                        console.log(error.responseText);
-                        alert('Something went wrong')
-                    }
-                });
-        }
-
-    </script>
-
 </@c.page>
