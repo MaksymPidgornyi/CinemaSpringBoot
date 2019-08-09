@@ -1,0 +1,229 @@
+html{
+    height: 100%;
+}
+
+header, footer{
+    background-color: #ffb366;
+    width:100%;
+
+}
+
+header{
+    height:100px;
+}
+
+#app-name{
+    font-size: 20px;
+    margin-top: 22px;
+}
+
+#loginForm{
+}
+
+#actionsDiv{
+    height: 32px;
+    background-color: yellow;
+}
+
+.action{
+    height:32px;
+    background-color: red;
+    text-align: center;
+    line-height: 32px;
+}
+
+button{
+    background-color: darkred;
+    border: none;
+}
+
+.actionLink{
+    color: white;
+    text-decoration: none;
+}
+
+.actionLink:hover{
+    text-decoration: none;
+    color: cyan;
+}
+
+a{
+    text-decoration: none;
+}
+
+.logDiv{
+    margin-top:20px;
+}
+
+.dbtn{
+    display: none;
+}
+
+.flag{
+    margin-top: 25px;
+    margin-left:5px;
+    width: 30px;
+    height: 30px
+}
+
+body{
+    background-color: #ccff99;
+    min-height: 100%;
+    padding-bottom: 100px;
+}
+
+#container{
+    padding-bottom: 100px;
+    overflow: auto;
+}
+
+footer{
+    position:absolute;
+    /*bottom:0;*/
+    height:100px;
+}
+
+#addSessionBtn{
+    background-color: green;
+    color: white;
+}
+
+#dateSelector{
+    padding-top: 25px;
+}
+
+.centered{
+    display: flex;
+    justify-content: center;
+}
+
+#addSession{
+    padding: 20px;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+#myInput {
+    border-box: box-sizing;
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+#myInput:focus {outline: 3px solid #ddd;}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 500px;
+    border: 1px solid #ddd;
+    z-index: 1;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.show {display:block;}
+
+.dmbtn{
+    color: white;
+    background-color: green;
+    display: none;
+}
+
+.dpbtn{
+    padding: 16px;
+}
+
+.movieOption{
+    /*border: red 2px solid;*/
+}
+
+.formDiv{
+    margin-top: 50px;
+    width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+    border: 2px black solid;
+}
+
+.formHeader{
+    border-bottom: 2px dimgrey solid;
+    font-size: 20px;
+    text-align: center;
+}
+
+.bordered{
+    border: red 2px solid;
+}
+
+.sessionBlock{
+    width: 600px;
+    height: 120px;
+}
+
+.sessionBtn{
+    margin-top: 40px;
+    margin-right: 15px;
+    width: 180px;
+    height: 40px;
+}
+
+#sessionsContainer{
+    padding-top: 30px;
+}
+
+.atbtn{
+    background-color: #66f542;
+
+    width: auto;
+    height: auto;
+    min-width: 45px;
+    min-height: 40px;
+}
+
+.stage{
+    border: black 2px solid;
+    width: 100px;
+    height: 50px;
+}
+
+label{
+    padding-left: 10px;
+}
+
+/*.first{*/
+/*    order:1;*/
+/*}*/
+
+/*.second{*/
+/*    order: 2;*/
+/*}*/
+
+/*.third{*/
+/*    order: 3;*/
+/*}*/
+
+/*.flex-container{*/
+/*    flex-flow:column wrap;*/
+/*    height:40px;*/
+/*}*/
