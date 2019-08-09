@@ -3,13 +3,13 @@
 
 Cinema web application. Guest (non-registered person) can see sessions and ordered/unordered tickets for each session and he can, obviously, register. Registered user can buy session tickets. Admin can add movies, actors, directors and sessions. Also admin can cancel existing session and see sessions attendance. 
 
-###Developer:
+### Developer:
 Maksym Pidgornyi
 
-###Mentor:
+### Mentor:
 Maksym Liashenko 
 
-###How to run a project:
+### How to run a project:
 
 1) Install maven: https://maven.apache.org/install.html
 2) Download the project
