@@ -1,24 +1,10 @@
 package com.service;
 
 import com.model.entity.Actor;
-import com.model.repository.ActorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class ActorService {
-    private ActorRepository repository;
+import java.util.List;
 
-    @Autowired
-    public void setRepository(ActorRepository repository) {
-        this.repository = repository;
-    }
-
-    public void addActor(Actor actor){
-        repository.save(actor);
-    }
-
-    public Iterable<Actor> getAllActors(){
-        return repository.findAll();
-    }
+public interface ActorService {
+    void addActor(Actor actor);
+    List<Actor> getAllActors();
 }

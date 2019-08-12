@@ -1,24 +1,11 @@
 package com.service;
 
 import com.model.entity.Film;
-import com.model.repository.FilmRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class MovieService {
-    private FilmRepository repository;
+public interface MovieService {
+    Iterable<Film> getAllMovies();
 
-    @Autowired
-    public void setRepository(FilmRepository repository) {
-        this.repository = repository;
-    }
+    void createMovie(Film film);
 
-    public Iterable<Film> getAllMovies(){
-        return repository.findAll();
-    }
-
-    public void createMovie(Film film){
-        repository.save(film);
-    }
+    void deleteMovie(Film film);
 }

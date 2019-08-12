@@ -1,27 +1,16 @@
 package com.service;
 
 import com.model.entity.Session;
-import com.model.repository.SessionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
+import java.util.List;
 
-@Service
-public class SessionService {
-    private SessionRepository repository;
+public interface SessionService {
+    void create(Session session);
 
-    @Autowired
-    public void setRepository(SessionRepository repository) {
-        this.repository = repository;
-    }
+    List<Session> getSessionsByDate(LocalDate date);
 
-    public void create(Session session){
-        repository.save(session);
-    }
-
-    public Page<Session> getSessionsByDate(LocalDate date, Pageable pageable){
-        return repository.findAllBySessionDate(date, pageable);
-    }
+    Page<Session> getSessionsByDate(LocalDate date, Pageable pageable);
 }
