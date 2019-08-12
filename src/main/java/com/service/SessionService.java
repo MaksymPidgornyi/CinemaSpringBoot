@@ -13,4 +13,6 @@ public interface SessionService {
     List<Session> getSessionsByDate(LocalDate date);
 
     Page<Session> getSessionsByDate(LocalDate date, Pageable pageable);
+
+    void deleteSession(Session session);
 }

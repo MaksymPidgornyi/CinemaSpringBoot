@@ -33,6 +33,7 @@ public class SessionServiceImpl implements SessionService {
         return repository.findAllBySessionDate(date, pageable);
     }
 
+    @Override
     public void deleteSession(Session session){
         repository.delete(session);
     }
