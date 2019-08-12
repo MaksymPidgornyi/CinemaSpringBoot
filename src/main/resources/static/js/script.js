@@ -82,3 +82,45 @@ function deselectMovie(id){
     btn.style.display = 'block';
 
 }
+
+function selectTicket(id){
+    var input = document.getElementById("places");
+    var btn = document.getElementById("btn" + id);
+    var dbtn = document.getElementById("dbtn" + id);
+
+    console.log(id);
+
+    if (input.value === "") {
+        input.value = id;
+    } else {
+        input.value += ", " + id;
+    }
+
+    console.log(input.value);
+
+    btn.style.backgroundColor = 'yellow';
+    btn.setAttribute('onclick', 'deselectTicket(' + id + ')')
+}
+
+function deselectTicket(id){
+    var input = document.getElementById("places");
+    var btn = document.getElementById("btn" + id);
+    var dbtn = document.getElementById("dbtn" + id);
+
+    var reg = new RegExp("^[\\d]+$");
+
+    if (input.value.indexOf(id) !== -1 && input.value.indexOf(id) !== 0) {
+        input.value = input.value.replace(", " + id, "");
+    } else if (input.value.indexOf(id) === 0) {
+        if (reg.test(input.value)) {
+            console.log("single character");
+            input.value = "";
+        }
+        else {
+            input.value = input.value.replace(id + ", ", "");
+        }
+    }
+
+    btn.style.backgroundColor = '#66f542';
+    btn.setAttribute('onclick', 'selectTicket(' + id + ')')
+}

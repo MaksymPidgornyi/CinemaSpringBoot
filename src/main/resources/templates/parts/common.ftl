@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
               crossorigin="anonymous"/>
-        <link rel="stylesheet" type="text/css" href="css/main.css"/>
+        <link rel="stylesheet" type="text/css" href="${springMacroRequestContext.contextPath}/css/main.css"/>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -19,7 +19,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
                 crossorigin="anonymous"></script>
-        <script src="js/script.js"></script>
+        <script src="${springMacroRequestContext.contextPath}/js/script.js"></script>
+        <@security.csrfMetaTags/>
     </head>
 
     <body>
@@ -30,8 +31,8 @@
             </div>
             <div class="col-5"></div>
             <div id="langParamContainer" class="col-1">
-                <a href="?lang=ua"><img src="images/uaFlag.png" class="flag" alt="ua"/></a>
-                <a href="?lang=en"><img src="images/ukFlag.png" class="flag" alt="en"/></a>
+                <a href="?lang=ua"><img src="${springMacroRequestContext.contextPath}/images/uaFlag.png" class="flag" alt="ua"/></a>
+                <a href="?lang=en"><img src="${springMacroRequestContext.contextPath}/images/ukFlag.png" class="flag" alt="en"/></a>
             </div>
             <div class="col-1 logDiv">
                 <@security.authorize access="isAuthenticated()">
@@ -113,23 +114,67 @@
 <#--        MODAL END        -->
 </#macro>
 
-<#macro pager url page>
+<#macro pager page sizes>
+    <#import "/spring.ftl" as spring>
+
     <div>
-        <ul class="pagination">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1"><@spring.message 'pagination.prev'/></a>
-            </li>
-            <#list 1..page.getTotalPages() as p>
-                <#if p == page.getNumber()>
+        <label for="pagSize"><@spring.message "page.afisha.size"/></label>
+        <#--        <select id="sizeSelector">-->
+        <#--            <option selected disabled><@spring.message "page.afisha.choose.size"/></option>-->
+        <#--            <#list sizes as s>-->
+        <#--                <option value="${s}">${s}</option>-->
+        <#--            </#list>-->
+        <#--        </select>-->
+
+        <ul id="pagSize" class="pagination">
+            <#list sizes as s>
+                <#if s == page.getSize()>
                     <li class="page-item active">
-                           <a class="page-link" href="#" tabindex="-1">${p}</a>
+                        <a class="page-link" href="#" tabindex="-1">${s}</a>
                     </li>
                 <#else>
                     <li class="page-item">
-                        <a class="page-link" href="#" tabindex="-1">#{p}</a>
+                        <a class="page-link" href="?page=${page.getNumber()}&size=${s}" tabindex="-1">${s}</a>
                     </li>
                 </#if>
             </#list>
+        </ul>
+
+        <ul class="pagination">
+            <#if page.getNumber() == 0>
+            <li class="page-item disabled">
+                <a class="page-link" href="#"
+                   tabindex="-1"><@spring.message 'pagination.prev'/></a>
+            </li>
+                <#else>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=${page.getNumber() - 1}&size=${page.getSize()}"
+                           tabindex="-1"><@spring.message 'pagination.prev'/></a>
+                    </li>
+            </#if>
+
+            <#list 1..page.getTotalPages() as p>
+                <#if (p - 1) == page.getNumber()>
+                    <li class="page-item active">
+                        <a class="page-link" href="#" tabindex="-1">${p}</a>
+                    </li>
+                <#else>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=${p - 1}&size=${page.getSize()}" tabindex="-1">${p}</a>
+                    </li>
+                </#if>
+            </#list>
+
+            <#if page.getNumber() == page.getTotalPages() - 1>
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1"><@spring.message 'pagination.next'/></a>
+                </li>
+            <#else>
+                <li class="page-item">
+                    <a class="page-link" href="?page=${page.getNumber() + 1}&size=${page.getSize()}"
+                       tabindex="-1"><@spring.message 'pagination.next'/></a>
+                </li>
+            </#if>
         </ul>
     </div>
 </#macro>
