@@ -224,19 +224,13 @@ label{
     text-align: center;
 }
 
-/*.first{*/
-/*    order:1;*/
-/*}*/
+#stage{
+    border: black 2px solid;
+    width: 100px;
+    height: 50px;
+}
 
-/*.second{*/
-/*    order: 2;*/
-/*}*/
-
-/*.third{*/
-/*    order: 3;*/
-/*}*/
-
-/*.flex-container{*/
-/*    flex-flow:column wrap;*/
-/*    height:40px;*/
-/*}*/
+.stat{
+    margin: 15px;
+    padding-top: 15px;
+}

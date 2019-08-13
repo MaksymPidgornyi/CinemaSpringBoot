@@ -1,10 +1,9 @@
 $("button.cancelBtn").click(function() {
+
+    console.log(this.id);
+
     $.ajax({
-        url: "/afisha/session/" + this.id,
-        type: "DELETE",
-        headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
-        success: function () {
-            console.log("deleted");
-        }
+        url: "/afisha/delete/" + this.id,
+        method: "DELETE"
     })
 });
