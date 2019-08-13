@@ -10,8 +10,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
-public class UserServiceImpl implements UserDetailsService, UserService {
+public class UserServiceImpl implements UserService {
     private UserRepository rep;
     private MessageSource messageSource;
     private PasswordEncoder encoder;
@@ -31,6 +33,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public void createUser(User user){
         rep.save(user);
+    }
+
+    @Override
+    public Optional<User> getUserByLogin(String login) {
+        return Optional.of(rep.findByLogin(login));
     }
 
     @Override
