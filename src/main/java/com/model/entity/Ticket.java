@@ -13,7 +13,7 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long ticketId;
-    private short placeNumber;
+    private int placeNumber;
     @ManyToOne(fetch = FetchType.EAGER)
     private Session session;
     @ManyToOne(fetch = FetchType.EAGER)

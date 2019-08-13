@@ -10,7 +10,10 @@ import java.util.Set;
 
 @Entity
 @Table(name="sessions")
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,6 +26,10 @@ public class Session {
     private LocalTime endTime;
     @NotNull
     private LocalDate sessionDate;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "session")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "session")
     private Set<Ticket> tickets;
+
+    public void setSessionDate(String sessionDate){
+        this.sessionDate = LocalDate.parse(sessionDate);
+    }
 }

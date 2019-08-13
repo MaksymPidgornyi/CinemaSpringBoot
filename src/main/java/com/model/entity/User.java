@@ -27,17 +27,17 @@ public class User implements UserDetails {
     @NotEmpty
     @Size(max = 40)
     private String login;
-    @Size(min = 8, max = 36)
+//    @Size(min = 8, max = 36)
     private String password;
+    @Transient
+    @NotEmpty
+    private String confirmation;
     @Email
     @NotEmpty
     private String email;
     @Enumerated(EnumType.STRING)
     private Role role;
     private boolean activity;
-    @Transient
-    @NotEmpty
-    private String confirmation;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<Ticket> tickets;
