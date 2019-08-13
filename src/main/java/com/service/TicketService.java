@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TicketService {
     void create(Ticket ticket);
-    List<Ticket> getTicketxBySession(Session session);
+    List<Ticket> getTicketsBySession(Session session);
 }

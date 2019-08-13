@@ -23,7 +23,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<Ticket> getTicketxBySession(Session session) {
+    public List<Ticket> getTicketsBySession(Session session) {
         return ticketRepository.findTicketsBySession(session);
     }
 }
