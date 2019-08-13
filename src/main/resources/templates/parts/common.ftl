@@ -119,12 +119,6 @@
 
     <div>
         <label for="pagSize"><@spring.message "page.afisha.size"/></label>
-        <#--        <select id="sizeSelector">-->
-        <#--            <option selected disabled><@spring.message "page.afisha.choose.size"/></option>-->
-        <#--            <#list sizes as s>-->
-        <#--                <option value="${s}">${s}</option>-->
-        <#--            </#list>-->
-        <#--        </select>-->
 
         <ul id="pagSize" class="pagination">
             <#list sizes as s>
@@ -165,7 +159,7 @@
                 </#if>
             </#list>
 
-            <#if page.getNumber() == page.getTotalPages() - 1>
+            <#if page.getNumber() == page.getTotalPages()>
                 <li class="page-item disabled">
                     <a class="page-link" href="#" tabindex="-1"><@spring.message 'pagination.next'/></a>
                 </li>

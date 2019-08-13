@@ -9,31 +9,50 @@
             <button><a href="?date=${sessionsDate.minusDays(1)}"><@spring.message "page.afisha.prevday"/></a></button>
             <button>${sessionsDate}</button>
             <button><a href="?date=${sessionsDate.plusDays(1)}"><@spring.message "page.afisha.nextday"/></a></button>
-       </div>
+        </div>
 
-        <@c.pager sessions sizes></@c.pager>
+        <div class="row">
+            <div class="col-8">
+            <@c.pager sessions sizes></@c.pager>
+            </div>
+
+            <@security.authorize access="hasAuthority('ADMIN')">
+            <div class="col-4">
+                <p><@spring.message "page.afisha.dailystat"/></p>
+                <p><@spring.message "page.afisha.dailyattendance"/> ${dailyAttendance} / ${seatsPerRow * rowsNumber * sessions.getTotalElements()}</p>
+            </div>
+            </@security.authorize>
+        </div>
 
         <#if sessions.content?has_content>
             <#list sessions.content as s>
-                <div id="session${s.sessionId}" class="sessionBlock bordered row">
-                    <div class="col-8">
-                        <p><@spring.message "page.afisha.movie"/>: ${s.film.filmName}</p>
-                        <p><@spring.message "page.afisha.start"/>: ${s.startTime}</p>
-                        <p><@spring.message "page.afisha.end"/>: ${s.endTime}</p>
-                    </div>
-                    <div class="col-4">
-                        <button class="sessionBtn btn-info">
-                            <a class="actionLink"
-                               href="/afisha/session?session=${s.sessionId}"><@spring.message "page.afisha.tickets"/></a>
-                        </button>
-                        <@security.authorize access="hasAuthority('ADMIN')">
-                            <button data-method="delete" type="button" class="cancelBtn btn-danger" id="${s.getSessionId()}" value="${s.getSessionId()}">
-<#--                                    <a href="/afisha/delete/${s.getSessionId()}" data-method="delete">-->
-                                        <@spring.message "page.afisha.cancel"/>
-<#--                                    </a>-->
+                <div id="sessionWithStat" class="row">
+                    <div id="session${s.sessionId}" class="sessionBlock bordered row col-7">
+                        <div class="col-8">
+                            <p><@spring.message "page.afisha.movie"/>: ${s.film.filmName}</p>
+                            <p><@spring.message "page.afisha.start"/>: ${s.startTime}</p>
+                            <p><@spring.message "page.afisha.end"/>: ${s.endTime}</p>
+                        </div>
+                        <div class="col-4">
+                            <button class="sessionBtn btn-info">
+                                <a class="actionLink"
+                                   href="/afisha/session/${s.sessionId}"><@spring.message "page.afisha.tickets"/></a>
                             </button>
-                        </@security.authorize>
+                            <@security.authorize access="hasAuthority('ADMIN')">
+                                <button data-method="delete" type="button" class="cancelBtn btn-danger"
+                                        id="${s.getSessionId()}" value="${s.getSessionId()}">
+                                    <@spring.message "page.afisha.cancel"/>
+                                </button>
+                            </@security.authorize>
+                        </div>
                     </div>
+                    <@security.authorize access="hasAuthority('ADMIN')">
+                        <div class="stat col-5">
+                            <p><@spring.message "page.afisha.sessionstat"/></p>
+                            <p><@spring.message "page.afisha.stat.attendance"/> ${s.getTickets()?size}
+                                /${rowsNumber * seatsPerRow}</p>
+                        </div>
+                    </@security.authorize>
                 </div>
             </#list>
         <#else>
@@ -79,7 +98,7 @@
                             <label for="time"><@spring.message "page.afisha.settime"/></label>
                             <input id="time" type="time" name="startTime" min="${minSessionStartTime}"
                                    max="${maxSessionStartTime}"/>
-                            <#if startTimeError??>
+                            <#if timeError??>
                                 <p><@spring.message "${timeError}"/></p>
                             </#if>
                             <br/>

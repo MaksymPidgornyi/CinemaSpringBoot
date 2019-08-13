@@ -5,24 +5,26 @@
 <@c.page "page.afisha.tickets">
     <div id="container">
         <div id="formDiv">
-            <form action="${springMacroRequestContext.contextPath}/afisha/session/${session.getSessionId()}/tickets" method="post">
+            <form action="${springMacroRequestContext.contextPath}/afisha/session/${session.getSessionId()}/tickets"
+                  method="post">
 
-                <input id="places" name="placeNumber" value="" hidden/>
+                <input id="places" name="places" value="" hidden/>
                 <input name="session" value="${session.getSessionId()}" hidden/>
-                <input name="userId" value="<@security.authorize access="isAuthenticated()">
-                <@security.authentication property="principal.username"/>
-                </@security.authorize>" hidden/>
-
-                <div id="stage" class="centered">
-                    <@spring.message "page.afisha.screen"/>
+                <input name="user"
+                       value="<@security.authorize access="isAuthenticated()"><@security.authentication property="principal.username"/></@security.authorize>"
+                       hidden/>
+                <div class="centered">
+                    <div id="stage" class="centered">
+                        <@spring.message "page.afisha.screen"/>
+                    </div>
                 </div>
                 <br/>
                 <br/>
 
                 <#list 1..rowsNumber as t>
                     <div class="row">
-                        <div class="col-2">
-                            <p class="tierNum">${t}</p>
+                        <div class="col-2 centered">
+                            <p class="rowNum">${t}</p>
                         </div>
                         <div class="col-10">
                             <#list 1..seatsPerRow as seat>
