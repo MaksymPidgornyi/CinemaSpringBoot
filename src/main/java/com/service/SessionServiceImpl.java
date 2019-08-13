@@ -25,12 +25,12 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public List<Session> getSessionsByDate(LocalDate date){
-        return repository.findAllBySessionDate(date);
+        return repository.findAllBySessionDateOrderByStartTime(date);
     }
 
     @Override
     public Page<Session> getSessionsByDate(LocalDate date, Pageable pageable){
-        return repository.findAllBySessionDate(date, pageable);
+        return repository.findAllBySessionDateOrderByStartTime(date, pageable);
     }
 
     @Override
