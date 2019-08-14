@@ -154,12 +154,12 @@
                     </li>
                 <#else>
                     <li class="page-item">
-                        <a class="page-link" href="?date=${date}&page=${p - 1}&size=${page.getSize()}" tabindex="-1">${p}</a>
+                        <a class="page-link" href="?date=${date}&page=${p}&size=${page.getSize()}" tabindex="-1">${p}</a>
                     </li>
                 </#if>
             </#list>
 
-            <#if page.getNumber() == page.getTotalPages() - 1>
+            <#if page.getTotalPages() == 0 || page.getNumber() == page.getTotalPages() - 1>
                 <li class="page-item disabled">
                     <a class="page-link" href="#" tabindex="-1"><@spring.message 'pagination.next'/></a>
                 </li>
