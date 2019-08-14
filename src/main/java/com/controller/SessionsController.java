@@ -46,9 +46,9 @@ public class SessionsController {
         LocalDate sessionsDate = Objects.nonNull(date) && !date.isEmpty() ? LocalDate.parse(date) : LocalDate.now();
         Page<Session> sessionPage = sessionService.getSessionsByDate(sessionsDate, pageable);
         boolean hasGap = ControllerUtils.checkIfGapBetweenSessionsExists(sessionPage.getContent());
-        Long dailyAttendance = sessionService.getSessionsByDate(sessionsDate)
+        Integer dailyAttendance = sessionService.getSessionsByDate(sessionsDate)
                 .stream()
-                .map(s -> s.getTickets().size()).count();
+                .map(s -> s.getTickets().size()).reduce(0, Integer::sum);
 
         model.addAttribute("dailyAttendance", dailyAttendance);
         model.addAttribute("rowsNumber", ROWS);
