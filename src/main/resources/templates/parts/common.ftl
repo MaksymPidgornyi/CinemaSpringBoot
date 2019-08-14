@@ -29,12 +29,12 @@
             <div id="appNameContainer" class="col-4">
                 <p id="app-name"><@spring.message "page.header"/></p>
             </div>
-            <div class="col-5"></div>
+            <div class="col-4"></div>
             <div id="langParamContainer" class="col-1">
                 <a href="?lang=ua"><img src="${springMacroRequestContext.contextPath}/images/uaFlag.png" class="flag" alt="ua"/></a>
                 <a href="?lang=en"><img src="${springMacroRequestContext.contextPath}/images/ukFlag.png" class="flag" alt="en"/></a>
             </div>
-            <div class="col-1 logDiv">
+            <div class="col-2 logDiv">
                 <@security.authorize access="isAuthenticated()">
                     <p><@security.authentication property="principal.username"/></p>
                 </@security.authorize>
@@ -114,7 +114,7 @@
 <#--        MODAL END        -->
 </#macro>
 
-<#macro pager page sizes>
+<#macro pager date page sizes>
     <#import "/spring.ftl" as spring>
 
     <div>
@@ -128,7 +128,7 @@
                     </li>
                 <#else>
                     <li class="page-item">
-                        <a class="page-link" href="?page=${page.getNumber()}&size=${s}" tabindex="-1">${s}</a>
+                        <a class="page-link" href="?date=${date}&size=${s}" tabindex="-1">${s}</a>
                     </li>
                 </#if>
             </#list>
@@ -142,7 +142,7 @@
             </li>
                 <#else>
                     <li class="page-item">
-                        <a class="page-link" href="?page=${page.getNumber() - 1}&size=${page.getSize()}"
+                        <a class="page-link" href="?date=${date}&page=${page.getNumber() - 1}&size=${page.getSize()}"
                            tabindex="-1"><@spring.message 'pagination.prev'/></a>
                     </li>
             </#if>
@@ -154,18 +154,18 @@
                     </li>
                 <#else>
                     <li class="page-item">
-                        <a class="page-link" href="?page=${p - 1}&size=${page.getSize()}" tabindex="-1">${p}</a>
+                        <a class="page-link" href="?date=${date}&page=${p - 1}&size=${page.getSize()}" tabindex="-1">${p}</a>
                     </li>
                 </#if>
             </#list>
 
-            <#if page.getNumber() == page.getTotalPages()>
+            <#if page.getNumber() == page.getTotalPages() - 1>
                 <li class="page-item disabled">
                     <a class="page-link" href="#" tabindex="-1"><@spring.message 'pagination.next'/></a>
                 </li>
             <#else>
                 <li class="page-item">
-                    <a class="page-link" href="?page=${page.getNumber() + 1}&size=${page.getSize()}"
+                    <a class="page-link" href="?date=${date}&page=${page.getNumber() + 1}&size=${page.getSize()}"
                        tabindex="-1"><@spring.message 'pagination.next'/></a>
                 </li>
             </#if>

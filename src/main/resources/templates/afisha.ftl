@@ -13,7 +13,7 @@
 
         <div class="row">
             <div class="col-8">
-            <@c.pager sessions sizes></@c.pager>
+            <@c.pager sessionsDate sessions sizes></@c.pager>
             </div>
 
             <@security.authorize access="hasAuthority('ADMIN')">
