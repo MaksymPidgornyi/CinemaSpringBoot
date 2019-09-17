@@ -148,9 +148,7 @@ public class SessionsController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public String deleteSession(@PathVariable Session id){
-        System.out.println(id);
         sessionService.deleteSession(id);
-
         return "redirect:/afisha?date=" + id.getSessionDate();
     }
 
